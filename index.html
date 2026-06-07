@@ -351,6 +351,15 @@
       justify-content: center;
       background: radial-gradient(ellipse at center, #1a1225, #0d0b15);
       transition: opacity 0.8s ease, visibility 0.8s ease;
+      cursor: pointer;
+      user-select: none;
+    }
+    .countdown-overlay .tap-pulse {
+      animation: tapPulse 2s ease-in-out infinite;
+    }
+    @keyframes tapPulse {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.05); }
     }
     .countdown-overlay.hidden {
       opacity: 0;
@@ -407,9 +416,9 @@
   <!-- ─── Countdown Overlay ─── -->
   <div class="countdown-overlay" id="countdownOverlay">
     <div class="heart-big">&#10084;</div>
-    <div class="wait-text">A little surprise loading...</div>
+    <div class="wait-text tap-pulse">Tap anywhere to start</div>
     <div class="count-number" id="countNumber">30</div>
-    <div class="sub-text">seconds</div>
+    <div class="sub-text">seconds till your surprise</div>
   </div>
 
   <!-- ─── Floating Hearts ─── -->
@@ -517,18 +526,44 @@
   </audio>
 
   <script>
-    // ─── Countdown ───
+    // ─── Countdown & Music ───
     let countdown = 30;
+    let started = false;
+    let musicPlaying = false;
     const countEl = document.getElementById('countNumber');
     const overlay = document.getElementById('countdownOverlay');
-    const interval = setInterval(() => {
-      countdown--;
-      countEl.textContent = countdown;
-      if (countdown <= 0) {
-        clearInterval(interval);
-        overlay.classList.add('hidden');
+    const music = document.getElementById('bgMusic');
+
+    overlay.addEventListener('click', () => {
+      if (started) return;
+      started = true;
+
+      music.play().catch(() => {});
+      musicPlaying = true;
+      document.getElementById('musicBtn').textContent = '\u266B';
+
+      const interval = setInterval(() => {
+        countdown--;
+        countEl.textContent = countdown;
+        if (countdown <= 0) {
+          clearInterval(interval);
+          overlay.classList.add('hidden');
+        }
+      }, 1000);
+    });
+
+    function toggleMusic() {
+      const btn = document.getElementById('musicBtn');
+      if (musicPlaying) {
+        music.pause();
+        musicPlaying = false;
+        btn.textContent = '\u266C';
+      } else {
+        music.play().catch(() => {});
+        musicPlaying = true;
+        btn.textContent = '\u266B';
       }
-    }, 1000);
+    }
 
     // ─── Floating Hearts ───
     const container = document.getElementById('heartsContainer');
@@ -578,18 +613,6 @@
     }
     updateCounter();
 
-    // ─── Music ───
-    let musicPlaying = false;
-    const music = document.getElementById('bgMusic');
-    function toggleMusic() {
-      if (musicPlaying) {
-        music.pause();
-        musicPlaying = false;
-      } else {
-        music.play().catch(() => {});
-        musicPlaying = true;
-      }
-    }
   </script>
 </body>
 </html>
