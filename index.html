@@ -341,6 +341,55 @@
       .love-letter { padding: 2rem 1.2rem; }
     }
 
+    /* ─── Countdown Overlay ─── */
+    .countdown-overlay {
+      position: fixed; inset: 0;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(ellipse at center, #1a1225, #0d0b15);
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+    .countdown-overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .countdown-overlay .heart-big {
+      font-size: clamp(4rem, 15vw, 8rem);
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+    .countdown-overlay .wait-text {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(1.2rem, 4vw, 2rem);
+      color: #c9a7eb;
+      margin-top: 1rem;
+      opacity: 0.8;
+    }
+    .countdown-overlay .count-number {
+      font-size: clamp(5rem, 20vw, 10rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, #ff4d6d, #ff9a9e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-top: 1.5rem;
+      line-height: 1;
+    }
+    .countdown-overlay .sub-text {
+      color: #6a5a7a;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
     /* ─── Scroll reveal ─── */
     .reveal {
       opacity: 0;
@@ -354,6 +403,14 @@
   </style>
 </head>
 <body>
+
+  <!-- ─── Countdown Overlay ─── -->
+  <div class="countdown-overlay" id="countdownOverlay">
+    <div class="heart-big">&#10084;</div>
+    <div class="wait-text">A little surprise loading...</div>
+    <div class="count-number" id="countNumber">30</div>
+    <div class="sub-text">seconds</div>
+  </div>
 
   <!-- ─── Floating Hearts ─── -->
   <div class="hearts-container" id="heartsContainer"></div>
@@ -460,6 +517,19 @@
   </audio>
 
   <script>
+    // ─── Countdown ───
+    let countdown = 30;
+    const countEl = document.getElementById('countNumber');
+    const overlay = document.getElementById('countdownOverlay');
+    const interval = setInterval(() => {
+      countdown--;
+      countEl.textContent = countdown;
+      if (countdown <= 0) {
+        clearInterval(interval);
+        overlay.classList.add('hidden');
+      }
+    }, 1000);
+
     // ─── Floating Hearts ───
     const container = document.getElementById('heartsContainer');
     const heartSymbols = ['\u2764', '\u2665', '\u{1F49C}', '\u{1F497}', '\u{1F49B}'];
