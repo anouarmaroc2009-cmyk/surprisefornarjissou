@@ -1,0 +1,39 @@
+HOW TO CUSTOMIZE THIS WEBSITE
+=============================
+
+1. ADD YOUR PHOTOS
+   - Drop your pictures into the "pictures" folder
+   - Name them photo1.jpg through photo8.jpg
+   - You can add more by editing the gallery section in index.html
+
+2. ADD YOUR NAMES
+   - Open index.html in any text editor
+   - Search for "Anouar" and replace with your name
+   - Search for "Narjiss" and replace with your girlfriend's name
+   - (around line 115 and 225)
+
+3. SET YOUR ANNIVERSARY DATE
+   - Open index.html
+   - Search for "2026-04-04" (line ~284)
+   - Change it to the date you two became official
+   - Format: YYYY-MM-DD
+
+4. EDIT THE LOVE STORY
+   - In the timeline section (around line 160),
+     update the events, dates, and descriptions to match your story
+
+5. ADD A SONG (optional)
+   - Drop an MP3 file named "our-song.mp3" into the pictures folder
+   - The music button in the bottom-right will play it
+
+6. CUSTOMIZE THE REASONS
+   - Around line 190, you'll find the "Why I Love You" cards
+   - Change the text to your own personal reasons
+
+7. PUBLISH ONLINE (free)
+   - Upload the entire "for-you" folder to:
+     * GitHub Pages (free) — instructions: https://pages.github.com
+     * Netlify (free) — drag & drop the folder
+     * Or just open index.html directly in a browser!
+
+Enjoy making her smile!

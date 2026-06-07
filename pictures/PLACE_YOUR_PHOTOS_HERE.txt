@@ -1,0 +1,16 @@
+HOW TO ADD YOUR PHOTOS
+======================
+
+1. Put your pictures in this folder (pictures/)
+2. Name them photo1.jpg, photo2.jpg, ... photo8.jpg
+   (or edit the filenames in index.html)
+3. Supported formats: .jpg, .jpeg, .png, .webp
+
+For the background music:
+- Add an MP3 file named "our-song.mp3" to this folder
+- Or change the src in index.html to point to your song file
+
+TIPS:
+- Use landscape-oriented photos for best results
+- Crop to square (1:1) for consistent gallery look
+- The first photo (photo1.jpg) will be the most visible one
